@@ -1,0 +1,19 @@
+# João David
+
+> Portfólio pessoal de João David: criação de sites e soluções com inteligência artificial, do protótipo ao código.
+
+João David é desenvolvedor e constrói sites e ferramentas na fronteira entre design e inteligência artificial, usando IA como parte do próprio processo de criação — da prototipagem à escrita de código.
+
+## Site
+
+- [Página inicial](https://boxdozze.github.io/meu-primeiro-site/): seções "Quem eu sou", "Como posso ajudar" (serviços), "Como trabalho" (processo) e "Contato".
+
+## Serviços
+
+- Criação de sites institucionais e pessoais.
+- Páginas de apresentação (landing pages).
+- Soluções com inteligência artificial: uso de IA no processo de criação e em ferramentas/automações que incorporam IA ao produto final.
+
+## Contato
+
+- E-mail: boxdozze@gmail.com
