@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://boxdozze.github.io/meu-primeiro-site/sitemap.xml
