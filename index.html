@@ -3,43 +3,575 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu primeiro teste com Claude Code</title>
+  <title>João David — Desenvolvimento Web × Inteligência Artificial</title>
+  <meta name="description" content="Portfólio pessoal de João David: sites e ferramentas na fronteira entre desenvolvimento web e inteligência artificial.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #F5F6F7;
+      --panel: #FFFFFF;
+      --ink: #14171A;
+      --ink-muted: #5B6169;
+      --grid-line: #DDE1E6;
+      --border: #D8DCE1;
+      --accent: #5B4FE9;
+      --signal: #E8542C;
+      --font-display: "Space Grotesk", sans-serif;
+      --font-body: "IBM Plex Sans", sans-serif;
+      --font-mono: "IBM Plex Mono", monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
-      height: 100vh;
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 48px 48px;
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.6;
+    }
+
+    a { color: var(--accent); }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* --- Nav --- */
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(245, 246, 247, 0.85);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      background-color: #003366;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
-      text-align: center;
+      justify-content: space-between;
+      padding: 1.1rem 0;
     }
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
+    .nav-name {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      color: var(--ink);
     }
 
-    button {
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 6px;
-      background-color: #ffffff;
-      color: #003366;
-      cursor: pointer;
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
     }
 
-    button:hover {
-      background-color: #dddddd;
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* --- Fig label (signature annotation) --- */
+
+    .fig {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+
+    .fig::before {
+      content: "";
+      width: 22px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    /* --- Hero --- */
+
+    .hero {
+      position: relative;
+      padding: 6rem 0 7rem;
+      overflow: hidden;
+    }
+
+    .hero-mesh {
+      position: absolute;
+      inset: -2rem -1.5rem auto -1.5rem;
+      height: 30rem;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 40rem;
+    }
+
+    h1.hero-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(2.75rem, 7vw, 5rem);
+      letter-spacing: -0.02em;
+      margin: 0 0 1.25rem;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--ink-muted);
+      max-width: 34rem;
+      margin: 0 0 2.25rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--bg);
+      background: var(--ink);
+      padding: 0.85rem 1.4rem;
+      border: 1px solid var(--ink);
+      transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+    }
+
+    .btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* --- Sections --- */
+
+    section {
+      padding: 5rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    h2.section-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      margin: 0 0 1.5rem;
+    }
+
+    /* --- Sobre --- */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      max-width: 34rem;
+      color: var(--ink-muted);
+      font-size: 1.02rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+      list-style: none;
+      padding: 0;
+    }
+
+    .tags li {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+      border: 1px solid var(--border);
+      background: var(--panel);
+      padding: 0.4rem 0.7rem;
+    }
+
+    /* --- Como posso ajudar --- */
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      position: relative;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 1.75rem;
+    }
+
+    .card::before,
+    .card::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-color: var(--accent);
+      border-style: solid;
+    }
+
+    .card::before {
+      top: -1px;
+      left: -1px;
+      border-width: 2px 0 0 2px;
+    }
+
+    .card::after {
+      bottom: -1px;
+      right: -1px;
+      border-width: 0 2px 2px 0;
+    }
+
+    .card-id {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--signal);
+      letter-spacing: 0.08em;
+    }
+
+    .card h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.15rem;
+      margin: 0.6rem 0 0.5rem;
+    }
+
+    .card p {
+      color: var(--ink-muted);
+      font-size: 0.92rem;
+      margin: 0;
+    }
+
+    /* --- Como trabalho --- */
+
+    .process-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+      gap: 2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .process-step {
+      border-top: 2px solid var(--accent);
+      padding-top: 1rem;
+    }
+
+    .process-num {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--signal);
+      letter-spacing: 0.08em;
+    }
+
+    .process-step h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin: 0.5rem 0 0.4rem;
+    }
+
+    .process-step p {
+      color: var(--ink-muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    /* --- Contato --- */
+
+    .contact-email {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      text-decoration: none;
+      color: var(--ink);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .contact-email:hover { color: var(--accent); }
+
+    /* --- Footer --- */
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+    }
+
+    footer p {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      color: var(--ink-muted);
+      margin: 0;
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { gap: 1rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .hero { padding: 4rem 0 4rem; }
     }
   </style>
 </head>
 <body>
-  <h1>Meu primeiro teste com Claude Code</h1>
-  <button>Funcionou</button>
+
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a href="#" class="nav-name">JOÃO_DAVID</a>
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#servicos">Como posso ajudar</a></li>
+        <li><a href="#processo">Como trabalho</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <canvas class="hero-mesh" id="mesh" aria-hidden="true"></canvas>
+    <div class="wrap hero-content">
+      <span class="fig">FIG. 01 — RETRATO</span>
+      <h1 class="hero-title">João David</h1>
+      <p class="hero-sub">Desenvolvedor que constrói sites e ferramentas na fronteira entre design e inteligência artificial — do protótipo ao código.</p>
+      <a class="btn" href="#servicos">Como posso ajudar</a>
+    </div>
+  </header>
+
+  <section id="sobre">
+    <div class="wrap">
+      <span class="fig">FIG. 02 — SOBRE</span>
+      <div class="about-grid">
+        <div class="about-text">
+          <h2 class="section-title">Quem eu sou</h2>
+          <p>Uso inteligência artificial como parte do processo de criação — da prototipagem à escrita de código — para construir sites rápidos, bem estruturados e com atenção ao detalhe visual. Este site é meu próprio laboratório: cada seção é testada e documentada como um experimento.</p>
+        </div>
+        <div>
+          <ul class="tags">
+            <li>HTML / CSS</li>
+            <li>JavaScript</li>
+            <li>Automação com IA</li>
+            <li>Prototipagem rápida</li>
+            <li>UI para produtos web</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicos">
+    <div class="wrap">
+      <span class="fig">FIG. 03 — SERVIÇOS</span>
+      <h2 class="section-title">Como posso ajudar</h2>
+      <div class="card-grid">
+        <article class="card">
+          <span class="card-id">S.01</span>
+          <h3>Criação de sites</h3>
+          <p>Sites institucionais e pessoais construídos do zero, com atenção a estrutura, performance e detalhe visual.</p>
+        </article>
+        <article class="card">
+          <span class="card-id">S.02</span>
+          <h3>Páginas de apresentação</h3>
+          <p>Landing pages focadas em comunicar uma proposta com clareza — para produtos, serviços ou perfis profissionais.</p>
+        </article>
+        <article class="card">
+          <span class="card-id">S.03</span>
+          <h3>Soluções com inteligência artificial</h3>
+          <p>Uso de IA no próprio processo de criação e na construção de ferramentas e automações que incorporam IA como parte do produto final.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="processo">
+    <div class="wrap">
+      <span class="fig">FIG. 04 — PROCESSO</span>
+      <h2 class="section-title">Como trabalho</h2>
+      <ol class="process-list">
+        <li class="process-step">
+          <span class="process-num">01</span>
+          <h3>Descoberta</h3>
+          <p>Entendimento do que você precisa: objetivo da página, público, conteúdo disponível e restrições.</p>
+        </li>
+        <li class="process-step">
+          <span class="process-num">02</span>
+          <h3>Planejamento</h3>
+          <p>Definição da estrutura, seções e prioridades antes de qualquer linha de código.</p>
+        </li>
+        <li class="process-step">
+          <span class="process-num">03</span>
+          <h3>Criação</h3>
+          <p>Construção do site, com atenção a design, código e comportamento responsivo.</p>
+        </li>
+        <li class="process-step">
+          <span class="process-num">04</span>
+          <h3>Revisão</h3>
+          <p>Ajustes com base no seu feedback, refinando conteúdo e detalhes visuais.</p>
+        </li>
+        <li class="process-step">
+          <span class="process-num">05</span>
+          <h3>Entrega</h3>
+          <p>Entrega do site pronto, testado e documentado.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="wrap">
+      <span class="fig">FIG. 05 — CONTATO</span>
+      <h2 class="section-title">Vamos conversar</h2>
+      <p class="hero-sub">Aberto a projetos e colaborações envolvendo desenvolvimento web e IA.</p>
+      <a class="contact-email" href="mailto:boxdozze@gmail.com">boxdozze@gmail.com</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p>© 2026 JOÃO DAVID — CONSTRUÍDO COM HTML, CSS E JS</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var canvas = document.getElementById('mesh');
+      if (!canvas || !canvas.getContext) return;
+      var ctx = canvas.getContext('2d');
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var w, h, points;
+      var mouse = { x: null, y: null };
+
+      function resize() {
+        var rect = canvas.parentElement.getBoundingClientRect();
+        w = canvas.width = rect.width;
+        h = canvas.height = rect.height;
+      }
+
+      function makePoints() {
+        var count = Math.max(18, Math.min(46, Math.floor((w * h) / 26000)));
+        points = [];
+        for (var i = 0; i < count; i++) {
+          points.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.25,
+            vy: (Math.random() - 0.5) * 0.25,
+            signal: i === 0
+          });
+        }
+      }
+
+      function step() {
+        ctx.clearRect(0, 0, w, h);
+
+        for (var i = 0; i < points.length; i++) {
+          var p = points[i];
+          if (!reduceMotion) {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > w) p.vx *= -1;
+            if (p.y < 0 || p.y > h) p.vy *= -1;
+
+            if (mouse.x !== null) {
+              var dx = p.x - mouse.x, dy = p.y - mouse.y;
+              var d = Math.sqrt(dx * dx + dy * dy);
+              if (d < 90) {
+                p.x += dx / d * 0.4;
+                p.y += dy / d * 0.4;
+              }
+            }
+          }
+        }
+
+        for (var a = 0; a < points.length; a++) {
+          for (var b = a + 1; b < points.length; b++) {
+            var dx2 = points[a].x - points[b].x;
+            var dy2 = points[a].y - points[b].y;
+            var dist = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+            if (dist < 140) {
+              ctx.strokeStyle = 'rgba(91, 79, 233, ' + (0.16 * (1 - dist / 140)) + ')';
+              ctx.lineWidth = 1;
+              ctx.beginPath();
+              ctx.moveTo(points[a].x, points[a].y);
+              ctx.lineTo(points[b].x, points[b].y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        for (var i2 = 0; i2 < points.length; i2++) {
+          var p2 = points[i2];
+          ctx.fillStyle = p2.signal ? '#E8542C' : 'rgba(20, 23, 26, 0.35)';
+          ctx.beginPath();
+          ctx.arc(p2.x, p2.y, p2.signal ? 3 : 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        if (!reduceMotion) requestAnimationFrame(step);
+      }
+
+      resize();
+      makePoints();
+      step();
+
+      window.addEventListener('resize', function () {
+        resize();
+        makePoints();
+        if (reduceMotion) step();
+      });
+
+      canvas.parentElement.addEventListener('mousemove', function (e) {
+        var rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+
+      canvas.parentElement.addEventListener('mouseleave', function () {
+        mouse.x = null;
+        mouse.y = null;
+      });
+    })();
+  </script>
+
 </body>
 </html>
